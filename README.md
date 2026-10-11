@@ -12,13 +12,7 @@
 - `.camera_yaw` - Set/Get camera horizontal (left<->right) rotation
 - `.camera_pitch` - Set/Get camera vertical (up<->down) rotation
 - `.camera_fov` - Set/Get camera Field of View
-- `.AddLine()` - Create instance of line
+
+- `.DrawLine(x1, y1, z1, x2, y2, z2, color_RGBA)` - Queue line for drawing
+
 - ##### AT END OF FRAME: `.DrawFrame()`  (returns 0 on success, source line number on error)
-
-#
-
-#### LineInstance (created with `.AddLine()`):
-- `.start` - Set/Get start position
-- `.end` - Set/Get end position
-- `.color_RGBA` - Set/Get color shift (in RGBA; 0xRRGGBBAA)
-- `.Remove()` - Remove from existence.
