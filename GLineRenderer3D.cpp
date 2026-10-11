@@ -37,7 +37,7 @@ const GLchar* VERTEX_SHADER = {"#version 460 core\n"
 
         "void main() {"
                 "gl_Position = viewProjection * vec4(pos, 1.0f);"
-                "color = unpackUnorm4x8(color_packed);"
+                "color = unpackUnorm4x8(color_packed).abgr;"
         "}"
 ""};
 const GLchar* FRAGMENT_SHADER = {"#version 460 core\n"
@@ -70,7 +70,7 @@ GLineRenderer3D::GLineRenderer3D() { this->_ = std::make_unique<GLineRenderer3D:
         glAttachShader(this->_->shader_id, fragment_shader_id);
         glLinkProgram(this->_->shader_id); glGetProgramiv(this->_->shader_id, GL_LINK_STATUS, &status); if (status == GL_FALSE) ERROR("Failed to link shader program"); glDeleteShader(vertex_shader_id); glDeleteShader(fragment_shader_id);
 
-        this->_->shader_viewProjection_location = glGetUniformLocation(this->_->shader_id, "modelViewProjection");
+        this->_->shader_viewProjection_location = glGetUniformLocation(this->_->shader_id, "viewProjection");
 
         glGenVertexArrays(1, &this->_->vao);
         glBindVertexArray(this->_->vao);
@@ -82,7 +82,7 @@ GLineRenderer3D::GLineRenderer3D() { this->_ = std::make_unique<GLineRenderer3D:
         glEnableVertexAttribArray(1);
         glVertexAttribIPointer(1, 1, GL_UNSIGNED_INT, sizeof(Line)/2, (void*)offsetof(Line, color_RGBA));
 
-        this->_->lines.reserve(MAX_LINES*sizeof(Line));
+        this->_->lines.reserve(MAX_LINES);
 }
 
 int GLineRenderer3D::DrawLine(
@@ -90,7 +90,7 @@ int GLineRenderer3D::DrawLine(
         float x2, float y2, float z2,
         uint32_t color_RGBA
 ) noexcept {
-        if (this->_->lines.size()+sizeof(Line) > MAX_LINES*sizeof(Line)) return __LINE__;
+        if (this->_->lines.size() > MAX_LINES) return __LINE__;
         Line& line = this->_->lines.emplace_back();
         line.x1 = x1; line.y1 = y1; line.z1 = z1;
         line.x2 = x2; line.y2 = y2; line.z2 = z2;
