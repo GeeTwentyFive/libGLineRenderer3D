@@ -66,6 +66,11 @@ int main() { try {
                         0x0000FFFF
                 );
 
+                glr3d.DrawBox(
+                        -0.5f, -0.5f, 0.5f,
+                        0.5f, 0.5f, 1.5f
+                );
+
                 glViewport(0, 0, gw.window_width, gw.window_height);
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glr3d.DrawFrame(gw.window_width, gw.window_height);

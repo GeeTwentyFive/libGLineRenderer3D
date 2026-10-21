@@ -16,5 +16,11 @@ class GLineRenderer3D { public: ~GLineRenderer3D(); explicit GLineRenderer3D(); 
                 uint32_t color_RGBA = 0xFFFFFFFF
         ) noexcept;  // returns (non-0) source line number on error
 
+        int DrawBox(
+                float x_min, float y_min, float z_min,
+                float x_max, float y_max, float z_max,
+                uint32_t color_RGBA = 0xFFFFFFFF
+        ) noexcept;
+
         int DrawFrame(int framebuffer_width, int framebuffer_height) noexcept;  // returns (non-0) source line number on error
 };

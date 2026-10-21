@@ -98,6 +98,26 @@ int GLineRenderer3D::DrawLine(
         return 0;
 }
 
+int GLineRenderer3D::DrawBox(
+        float x_min, float y_min, float z_min,
+        float x_max, float y_max, float z_max,
+        uint32_t color_RGBA
+) noexcept {
+        if (DrawLine(x_min, y_min, z_min, x_min, y_max, z_min, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_min, y_max, z_min, x_max, y_max, z_min, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_max, z_min, x_max, y_min, z_min, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_min, z_min, x_min, y_min, z_min, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_min, y_min, z_max, x_min, y_max, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_min, y_max, z_max, x_max, y_max, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_max, z_max, x_max, y_min, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_min, z_max, x_min, y_min, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_min, y_min, z_min, x_min, y_min, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_min, y_max, z_min, x_min, y_max, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_max, z_min, x_max, y_max, z_max, color_RGBA) != 0) return __LINE__;
+        if (DrawLine(x_max, y_min, z_min, x_max, y_min, z_max, color_RGBA) != 0) return __LINE__;
+        return 0;
+}
+
 int GLineRenderer3D::DrawFrame(int framebuffer_width, int framebuffer_height) noexcept { glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE); glEnable(GL_DEPTH_TEST);
         glUseProgram(this->_->shader_id);
 
