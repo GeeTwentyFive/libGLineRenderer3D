@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _LIBGLINERENDERER3D_H
+#define _LIBGLINERENDERER3D_H
 
 #include <memory>
 #include <stddef.h>
@@ -24,3 +25,5 @@ class GLineRenderer3D { public: ~GLineRenderer3D(); explicit GLineRenderer3D(); 
 
         int DrawFrame(int framebuffer_width, int framebuffer_height) noexcept;  // returns (non-0) source line number on error
 };
+
+#endif // _LIBGLINERENDERER3D_H
